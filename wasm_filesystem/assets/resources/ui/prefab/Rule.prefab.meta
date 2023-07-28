@@ -1,0 +1,14 @@
+{
+  "ver": "1.1.40",
+  "importer": "prefab",
+  "imported": true,
+  "uuid": "32bd73a9-3bea-4610-827e-b2db69d5e6fe",
+  "files": [
+    ".json"
+  ],
+  "subMetas": {},
+  "userData": {
+    "syncNodeName": "Rule",
+    "persistent": false
+  }
+}
