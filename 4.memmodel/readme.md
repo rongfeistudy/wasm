@@ -1,0 +1,2 @@
+# 单向透明的内存模型
+JavaScript中的ArrayBuffer无法直接访问，必须通过某种类型的TypedArray方可对其进行读写。例如下列JavaScript代码创建了一个容量为12字节的ArrayBuffer，并在其上创建了类型为int32的TypedArray，通过该View依次向其中存入了1111111、2222222、3333333三个int32型的数：

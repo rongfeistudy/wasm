@@ -1,0 +1,2 @@
+ emcc fibonacci.cc -o fibonacci.js -sEXPORTED_RUNTIME_METHODS=UTF32ToString -s ALLOW_MEMORY_GROWTH --preload-file test
+ emcc fibonacci.cc -o fibonacci.js -sEXPORTED_RUNTIME_METHODS=UTF32ToString -s ALLOW_MEMORY_GROWTH --preload-file test

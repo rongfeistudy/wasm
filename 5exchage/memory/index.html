@@ -1,0 +1,64 @@
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Emscripten:你好，世界！</title>
+  </head>
+
+  <body>
+    <img id="my-img" />
+    <script>
+        Module = {};
+        Module.onRuntimeInitialized = function() {
+            //do sth.
+            var ptr = Module._fibonacci(10);
+            if (ptr == 0) return;
+            var str = '';
+            for (var i = 0; i < 10; i++){
+                str += Module.HEAP32[(ptr >> 2) + i];
+                str += ' ';
+            }
+            console.log(str);
+            Module._free_buf(ptr);
+
+            // var ptr = Module._chararr(10);
+            // if (ptr == 0) return;
+            // var str = '';
+            // for (var i = 0; i < 10; i++){
+            //     str += String.fromCharCode(Module.HEAP8[(ptr) + i]);
+            //     str += ' ';
+            // }
+            // console.log(str, UTF8ToString);
+            const start = new Date().getTime();
+            var ptr = Module._filechar();
+            var ddd1 = Module._get_result_pointer(ptr);
+            var ddd = Module._get_result_size(ptr);
+            // console.log(ddd1, ddd, Module.HEAP32[ddd>>2]);
+            const resultView = new Uint8Array(Module.HEAP8.buffer, ddd1, ddd);
+            const result = new Uint8Array(resultView);
+            // console.log(result);
+            const end = new Date().getTime();
+            console.log(end-start);
+            document.getElementById('my-img').src = URL.createObjectURL(
+                new Blob([result.buffer], { type: 'image/png' } /* (1) */)
+            );
+            var start2 = new Date().getTime();
+            var img = new Image();
+            img.onload = () => {
+                console.log(new Date().getTime() - start2, '==========');
+            }
+            img.src = 'http://172.16.229.98:8081/test/test1.png'; 
+            // if (ptr == 0) return;
+            // var str = '';
+            // for (var i = 0; i < 10000; i++){
+            //     str += Module.HEAP8[(ptr) + i];
+            //     str += ' ';
+            // }
+            // console.log(Module.HEAP8, UTF8ToString);
+        }
+    </script>
+    <script src="fibonacci.js"></script>
+    
+  </body>
+</html>

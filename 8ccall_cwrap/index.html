@@ -1,0 +1,49 @@
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Emscripten:你好，世界！</title>
+  </head>
+
+  <body>
+    <img id="my-img" />
+    <script>
+        Module = {};
+        Module.onRuntimeInitialized = function() {
+            var result = Module.ccall('add', 'number', ['number', 'number'], [13.0, 42]);
+            console.log(result);
+            var result = Module._add(13, 42);
+            console.log(result);
+            var str = 'The answer is:42';
+	        Module.ccall('print_string', 'null', ['string'], [str]);
+
+            // 可以传递 unit8array
+            var count = 50;
+            var buf = new ArrayBuffer(count * 4);
+            var i8 = new Uint8Array(buf);
+            var i32 = new Int32Array(buf);
+            for (var i = 0; i < count; i++){
+                i32[i] = i + 1;
+            }
+            result = Module.ccall('sum', 'number', ['array', 'number'], [i8, count]);
+            console.log(result);
+            // 如果C导出函数返回了无需释放的字符串（静态字符串，或存放在由C代码自行管理的地址中的字符串），在JavaScript中使用ccall调用，亦可直接获取返回的字符串，例如：
+            console.log(Module.ccall('get_string', 'string'));
+
+            var c_add = Module.cwrap('add', 'number', ['number', 'number']);
+            var c_print_string = Module.cwrap('print_string', 'null', ['string']);
+            var c_sum = Module.cwrap('sum', 'number', ['array', 'number']);
+            var c_get_string = Module.cwrap('get_string', 'string');
+
+            console.log(c_add(25.0, 41));
+            c_print_string(str);
+            console.log(c_get_string());
+            console.log(c_sum(i8, count));
+            
+        }
+    </script>
+    <script src="demo.js"></script>
+    
+  </body>
+</html>
