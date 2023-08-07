@@ -4700,10 +4700,6 @@ var _filechar = Module['_filechar'] = createExportWrapper("filechar");
 /** @type {function(...*):?} */
 var _readFile = Module['_readFile'] = createExportWrapper("readFile");
 /** @type {function(...*):?} */
-var _get_result_pointer = Module['_get_result_pointer'] = createExportWrapper("get_result_pointer");
-/** @type {function(...*):?} */
-var _get_result_size = Module['_get_result_size'] = createExportWrapper("get_result_size");
-/** @type {function(...*):?} */
 var ___errno_location = createExportWrapper("__errno_location");
 /** @type {function(...*):?} */
 var _fflush = Module['_fflush'] = createExportWrapper("fflush");

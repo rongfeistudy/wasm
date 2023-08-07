@@ -63,11 +63,3 @@ EM_PORT_API(void) readFile() {
     delete[] buffer;
     fclose(fp);
 }
-EM_PORT_API(int) get_result_pointer(int* result) {
-    return result[0];
-}
-
-
-EM_PORT_API(int) get_result_size(int* result) {
-    return result[1];
-}

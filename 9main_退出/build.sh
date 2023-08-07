@@ -1,0 +1,1 @@
+emcc main.cc -s NO_EXIT_RUNTIME=0 -o main.js
